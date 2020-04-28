@@ -197,13 +197,14 @@ function modifyDesiredRemainingTime() {
 function adjustDesiredTimeChart() {
   desiredtimeValues.forEach((val, i) => {
     if(val.value) {
-      timeChart.data.datasets[1].data[i] = val.value;
+      desiredtimeChart.data.datasets[0].data[i] = val.value;
       timebarChart.data.datasets[1].data[i] = val.value;
     }
   });
-  timeChart.data.datasets[1].data[8] = desiredtimeRemaining.value;
+  desiredtimeChart.data.datasets[0].data[8] = desiredtimeRemaining.value;
   timebarChart.data.datasets[1].data[8] = desiredtimeRemaining.value;
   timeChart.update();
+  desiredtimeChart.update();
   timebarChart.update();
 }
 
@@ -262,9 +263,31 @@ const timeChart = new Chart(timectx, {
               'rgba(0,0,0,0.8)'
           ],
           borderWidth: 2
+      }
+      ]
+  },
+  options: {
+    responsive: false,
+    legend: {
+      labels: {
+        fontColor: "black"
       },
-          {
-          label: 'Time Desired',
+      display: true,
+      position: 'left'
+    },
+      animation: {
+        animateRotate: false
+      }
+  }
+});
+
+const desiredtimectx = document.getElementById('ctx-desiredtime');
+const desiredtimeChart = new Chart(desiredtimectx, {
+  type: 'pie',
+  data: {
+      labels: ['Work', 'Finances', 'Health', 'Fun', 'Faith', 'Family', 'Community', 'Learning', 'Free'],
+      datasets: [{
+          label: 'Time Spent',
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 112
           ],

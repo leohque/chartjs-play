@@ -15,3 +15,7 @@ canvas {
   display:flex;
   flex-direction:column;
 }
+
+.timecanvas {
+  display:flex;
+}

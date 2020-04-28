@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
   <title>Chart.js Test</title>
 </head>
@@ -79,7 +81,10 @@
           <input type="number" id="desiredtimeRemaining" value="112" disabled>
         </div>
       </div>
-      <canvas id="ctx-time" width="400" height="300"></canvas>
+      <div class="timecanvas">
+        <canvas id="ctx-time" width="400" height="300"></canvas>
+        <canvas id="ctx-desiredtime" width="400" height="300"></canvas>
+      </div>
       <canvas id="ctx-timebar" width="400" height="300"></canvas>
     </div>
   </div>
