@@ -108,6 +108,17 @@ const timeValue7 = document.getElementById('time7');
 const timeValue8 = document.getElementById('time8');
 const timeValues = [timeValue1, timeValue2, timeValue3, timeValue4, timeValue5, timeValue6, timeValue7, timeValue8]
 
+const desiredtimeValue1 = document.getElementById('desiredtime1');
+const desiredtimeValue2 = document.getElementById('desiredtime2');
+const desiredtimeValue3 = document.getElementById('desiredtime3');
+const desiredtimeValue4 = document.getElementById('desiredtime4');
+const desiredtimeValue5 = document.getElementById('desiredtime5');
+const desiredtimeValue6 = document.getElementById('desiredtime6');
+const desiredtimeValue7 = document.getElementById('desiredtime7');
+const desiredtimeValue8 = document.getElementById('desiredtime8');
+const desiredtimeValues = [desiredtimeValue1, desiredtimeValue2, desiredtimeValue3, desiredtimeValue4, desiredtimeValue5, desiredtimeValue6, desiredtimeValue7, desiredtimeValue8]
+
+
 function changeCategory() {
   categories.forEach((category, i) => {
     fullnessChart.data.labels[i] = category.value;
@@ -152,7 +163,9 @@ function modifyTime() {
   let sleeping = timeSleeping.value;
   let available = total - sleeping;
   timeAvailable.value = available;
+  desiredtimeRemaining.value = available;
   modifyRemainingTime();
+  modifyDesiredRemainingTime();
 }
 
 timeTotal.addEventListener('change', modifyTime);
@@ -163,10 +176,30 @@ function modifyRemainingTime() {
   let t = 0;
   timeValues.forEach(value => {
     if(value.value) { t += parseInt(value.value); }
-  })
+  });
   let available = timeAvailable.value;
   let remaining = available - t;
   timeRemaining.value = remaining;
+}
+
+function modifyDesiredRemainingTime() {
+  let t = 0;
+  desiredtimeValues.forEach(val => {
+    if (val.value) { t += parseInt(val.value); }
+  });
+  let avail = timeAvailable.value;
+  let remaining = avail - t;
+  desiredtimeRemaining.value = remaining;
+}
+
+function adjustDesiredTimeChart() {
+  desiredtimeValues.forEach((val, i) => {
+    if(val.value) {
+      timeChart.data.datasets[1].data[i] = val.value;
+    }
+  });
+  timeChart.data.datasets[1].data[8] = timeRemaining.value;
+  timeChart.update();
 }
 
 function adjustTimeChart() {
@@ -175,6 +208,7 @@ function adjustTimeChart() {
       timeChart.data.datasets[0].data[i] = val.value;
     }
   });
+  timeChart.data.datasets[0].data[8] = timeRemaining.value;
   timeChart.update();
 }
 
@@ -182,15 +216,20 @@ timeValues.forEach(value => {
   value.addEventListener('change', modifyRemainingTime);
   value.addEventListener('change', adjustTimeChart);
 });
+desiredtimeValues.forEach(value => {
+  value.addEventListener('change', modifyDesiredRemainingTime);
+  value.addEventListener('change', adjustDesiredTimeChart);
+})
 
 const timectx = document.getElementById('ctx-time');
 const timeChart = new Chart(timectx, {
   type: 'pie',
   data: {
-      labels: ['Work', 'Finances', 'Health', 'Fun', 'Faith', 'Family', 'Community', 'Learning'],
+      labels: ['Work', 'Finances', 'Health', 'Fun', 'Faith', 'Family', 'Community', 'Learning', 'Free'],
       datasets: [{
+          label: 'Time Spent',
           data: [
-            0, 0, 0, 0, 0, 0, 0, 0
+            0, 0, 0, 0, 0, 0, 0, 0, 112
           ],
           backgroundColor: [
               '#27A349',
@@ -200,9 +239,11 @@ const timeChart = new Chart(timectx, {
               '#B041A0',
               '#604C86',
               '#3B64FA',
-              '#45FAF9'
+              '#45FAF9',
+              '#FFFFFF'
           ],
           borderColor: [
+              'rgba(0,0,0,0.8)',
               'rgba(0,0,0,0.8)',
               'rgba(0,0,0,0.8)',
               'rgba(0,0,0,0.8)',
@@ -213,7 +254,37 @@ const timeChart = new Chart(timectx, {
               'rgba(0,0,0,0.8)'
           ],
           borderWidth: 2
-      }]
+      },
+          {
+          label: 'Time Remaining',
+          data: [
+            0, 0, 0, 0, 0, 0, 0, 0, 112
+          ],
+          backgroundColor: [
+              '#27A349',
+              '#F1DE11',
+              '#EC8125',
+              '#F32C2C',
+              '#B041A0',
+              '#604C86',
+              '#3B64FA',
+              '#45FAF9',
+              '#FFFFFF'
+          ],
+          borderColor: [
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)'
+          ],
+          borderWidth: 2
+      }
+      ]
   },
   options: {
     responsive: false,
