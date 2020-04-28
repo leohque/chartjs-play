@@ -2,22 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
   <title>Chart.js Test</title>
 </head>
 <body>
   <div class="container">
-    <canvas id="ctx" width="400" height="300"></canvas>
-    <div class="d-flex flex-column">
-      <input type="text" class="form-control" placeholder="Family" name="family" id="family" value="10">
-      <input type="text" class="form-control" placeholder="Community" name="community" id="community" value="10">
-      <input type="text" class="form-control" placeholder="Education" name="education" id="education" value="10">
-      <input type="text" class="form-control" placeholder="Career" name="career" id="career" value="10">
-      <input type="text" class="form-control" placeholder="Finances" name="finances" id="finances" value="10">
-      <input type="text" class="form-control" placeholder="Health" name="health" id="health" value="10">
-      <input type="text" class="form-control" placeholder="Leisure" name="leisure" id="leisure" value="10">
-      <input type="text" class="form-control" placeholder="Faith" name="faith" id="faith" value="10">
+    <h2>Define for Yourself</h2>
+    <p>Edit the following categories & assign them a value of importance</p>
+    <div class="intro-category">
+      <div class="categories">
+        <input type="text" id="category1">
+        <input type="text" id="category2">
+        <input type="text" id="category3">
+        <input type="text" id="category4">
+        <input type="text" id="category5">
+        <input type="text" id="category6">
+        <input type="text" id="category7">
+        <input type="text" id="category8">
+      </div>
+      <div class="fullness">
+        <input type="number" id="fullness1" value="10">
+        <input type="number" id="fullness2" value="10">
+        <input type="number" id="fullness3" value="10">
+        <input type="number" id="fullness4" value="10">
+        <input type="number" id="fullness5" value="10">
+        <input type="number" id="fullness6" value="10">
+        <input type="number" id="fullness7" value="10">
+        <input type="number" id="fullness8" value="10">
+      </div>
+    </div>
+    <canvas id="ctx-fullness" width="400" height="300"></canvas>
+
+    <h2>Where do you actually spend your time?</h2>
+    <div class="time">
+      <div class="time-values">
+        <div class="time-total">Total hours per week: <input type="number" value="168" id="timeTotal"> (168 is reality)</div>
+        <div class="time-sleeping">Time sleeping: <input type="number" value="56" id="timeSleeping"> (56 assumes 8 hours per night)</div>
+        <div class="time-available">Time available: <input type="number" value="112" id="timeAvailable" disabled></div>
+      </div>
+      <p>Fill in...</p>
+      <div class="time-table">
+        <div class="time-categories">
+          <span>Category:</span>
+          <input type="text" id="time-category1" disabled>
+          <input type="text" id="time-category2" disabled>
+          <input type="text" id="time-category3" disabled>
+          <input type="text" id="time-category4" disabled>
+          <input type="text" id="time-category5" disabled>
+          <input type="text" id="time-category6" disabled>
+          <input type="text" id="time-category7" disabled>
+          <input type="text" id="time-category8" disabled>
+          <span>Remaining time:</span>
+        </div>
+        <div class="time-values">
+          <span>Hours Spent</span>
+          <input type="number" id="time1">
+          <input type="number" id="time2">
+          <input type="number" id="time3">
+          <input type="number" id="time4">
+          <input type="number" id="time5">
+          <input type="number" id="time6">
+          <input type="number" id="time7">
+          <input type="number" id="time8">
+          <input type="number" id="timeRemaining" value="112" disabled>
+        </div>
+        <div class="desired-time-values">
+          <span>Desired</span>
+          <input type="number" id="desiredtime1">
+          <input type="number" id="desiredtime2">
+          <input type="number" id="desiredtime3">
+          <input type="number" id="desiredtime4">
+          <input type="number" id="desiredtime5">
+          <input type="number" id="desiredtime6">
+          <input type="number" id="desiredtime7">
+          <input type="number" id="desiredtime8">
+          <input type="number" id="desiredtimeRemaining" value="112" disabled>
+        </div>
+      </div>
+      <canvas id="ctx-time" width="400" height="300"></canvas>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>

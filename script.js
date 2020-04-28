@@ -1,22 +1,30 @@
-const family = document.getElementById('family');
-const community = document.getElementById('community');
-const education = document.getElementById('education');
-const career = document.getElementById('career');
-const finances = document.getElementById('finances');
-const health = document.getElementById('health');
-const leisure = document.getElementById('leisure');
-const faith = document.getElementById('faith');
+const category1 = document.getElementById('category1');
+const category2 = document.getElementById('category2');
+const category3 = document.getElementById('category3');
+const category4 = document.getElementById('category4');
+const category5 = document.getElementById('category5');
+const category6 = document.getElementById('category6');
+const category7 = document.getElementById('category7');
+const category8 = document.getElementById('category8');
+const categories = [category1, category2, category3, category4, category5, category6, category7, category8]
 
-const pieces = [family, community, education, career, finances, health, leisure, faith];
+const fullness1 = document.getElementById('fullness1');
+const fullness2 = document.getElementById('fullness2');
+const fullness3 = document.getElementById('fullness3');
+const fullness4 = document.getElementById('fullness4');
+const fullness5 = document.getElementById('fullness5');
+const fullness6 = document.getElementById('fullness6');
+const fullness7 = document.getElementById('fullness7');
+const fullness8 = document.getElementById('fullness8');
+const fullnessValues = [fullness1, fullness2, fullness3, fullness4, fullness5, fullness6, fullness7, fullness8];
 
 
-const chartCanvas = document.getElementById('ctx');
-const igChart = new Chart(chartCanvas, {
+const fullnessctx = document.getElementById('ctx-fullness');
+const fullnessChart = new Chart(fullnessctx, {
   type: 'polarArea',
   data: {
-      labels: ['Family', 'Community', 'Education', 'Career', 'Finances', 'Health', 'Leisure', 'Faith'],
+      labels: ['Work', 'Finances', 'Health', 'Fun', 'Faith', 'Family', 'Community', 'Learning'],
       datasets: [{
-          max: 100,
           label: 'Wheel of Life',
           data: [
             10, 10, 10, 10, 10, 10, 10, 10
@@ -80,14 +88,144 @@ const igChart = new Chart(chartCanvas, {
   }
 });
 
+const timeCategory1 = document.getElementById('time-category1');
+const timeCategory2 = document.getElementById('time-category2');
+const timeCategory3 = document.getElementById('time-category3');
+const timeCategory4 = document.getElementById('time-category4');
+const timeCategory5 = document.getElementById('time-category5');
+const timeCategory6 = document.getElementById('time-category6');
+const timeCategory7 = document.getElementById('time-category7');
+const timeCategory8 = document.getElementById('time-category8');
+const timeCategories = [timeCategory1, timeCategory2, timeCategory3, timeCategory4, timeCategory5, timeCategory6, timeCategory7, timeCategory8]
 
-function modifyData() {
-  pieces.forEach((piece, i) => {
-    igChart.data.datasets[0].data[i] = piece.value;
+const timeValue1 = document.getElementById('time1');
+const timeValue2 = document.getElementById('time2');
+const timeValue3 = document.getElementById('time3');
+const timeValue4 = document.getElementById('time4');
+const timeValue5 = document.getElementById('time5');
+const timeValue6 = document.getElementById('time6');
+const timeValue7 = document.getElementById('time7');
+const timeValue8 = document.getElementById('time8');
+const timeValues = [timeValue1, timeValue2, timeValue3, timeValue4, timeValue5, timeValue6, timeValue7, timeValue8]
+
+function changeCategory() {
+  categories.forEach((category, i) => {
+    fullnessChart.data.labels[i] = category.value;
+    timeChart.data.labels[i] = category.value;
   });
-  igChart.update();
+  timeCategories.forEach((category, i) => {
+    category.value = fullnessChart.data.labels[i];
+  });
+  fullnessChart.update();
+  timeChart.update();
 }
 
-pieces.forEach((piece) => {
-  document.addEventListener('change', modifyData);
+categories.forEach((category, index) => {
+  category.value = fullnessChart.data.labels[index];
+  category.addEventListener('change', changeCategory);
+});
+
+timeCategories.forEach((category, index) => {
+  category.value = fullnessChart.data.labels[index];
+});
+
+
+function modifyFullness() {
+  fullnessValues.forEach((piece, i) => {
+    fullnessChart.data.datasets[0].data[i] = piece.value;
+  });
+  fullnessChart.update();
+}
+
+fullnessValues.forEach((piece) => {
+  piece.addEventListener('change', modifyFullness);
+});
+
+const timeTotal = document.getElementById('timeTotal');
+const timeSleeping = document.getElementById('timeSleeping');
+const timeAvailable = document.getElementById('timeAvailable');
+const timeRemaining = document.getElementById('timeRemaining');
+const desiredtimeRemaining = document.getElementById('desiredtimeRemaining');
+
+function modifyTime() {
+  let total = timeTotal.value;
+  let sleeping = timeSleeping.value;
+  let available = total - sleeping;
+  timeAvailable.value = available;
+  modifyRemainingTime();
+}
+
+timeTotal.addEventListener('change', modifyTime);
+timeSleeping.addEventListener('change', modifyTime);
+timeAvailable.addEventListener('change', modifyTime);
+
+function modifyRemainingTime() {
+  let t = 0;
+  timeValues.forEach(value => {
+    if(value.value) { t += parseInt(value.value); }
+  })
+  let available = timeAvailable.value;
+  let remaining = available - t;
+  timeRemaining.value = remaining;
+}
+
+function adjustTimeChart() {
+  timeValues.forEach((val, i) => {
+    if(val.value) {
+      timeChart.data.datasets[0].data[i] = val.value;
+    }
+  });
+  timeChart.update();
+}
+
+timeValues.forEach(value => {
+  value.addEventListener('change', modifyRemainingTime);
+  value.addEventListener('change', adjustTimeChart);
+});
+
+const timectx = document.getElementById('ctx-time');
+const timeChart = new Chart(timectx, {
+  type: 'pie',
+  data: {
+      labels: ['Work', 'Finances', 'Health', 'Fun', 'Faith', 'Family', 'Community', 'Learning'],
+      datasets: [{
+          data: [
+            0, 0, 0, 0, 0, 0, 0, 0
+          ],
+          backgroundColor: [
+              '#27A349',
+              '#F1DE11',
+              '#EC8125',
+              '#F32C2C',
+              '#B041A0',
+              '#604C86',
+              '#3B64FA',
+              '#45FAF9'
+          ],
+          borderColor: [
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)'
+          ],
+          borderWidth: 2
+      }]
+  },
+  options: {
+    responsive: false,
+    legend: {
+      labels: {
+        fontColor: "black"
+      },
+      display: true,
+      position: 'right'
+    },
+      animation: {
+        animateRotate: false
+      }
+  }
 });

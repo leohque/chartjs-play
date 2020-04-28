@@ -1,3 +1,17 @@
-#ctx {
-  margin:1em;
+canvas {
+  margin:0 auto;
+}
+
+.container {
+  text-align:center;
+}
+
+.intro-category, .time-table {
+  display:flex;
+  justify-content:center;
+}
+
+.categories, .fullness, .time-categories, .time-values, .desired-time-values {
+  display:flex;
+  flex-direction:column;
 }
