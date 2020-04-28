@@ -123,12 +123,14 @@ function changeCategory() {
   categories.forEach((category, i) => {
     fullnessChart.data.labels[i] = category.value;
     timeChart.data.labels[i] = category.value;
+    timebarChart.data.labels[i] = category.value;
   });
   timeCategories.forEach((category, i) => {
     category.value = fullnessChart.data.labels[i];
   });
   fullnessChart.update();
   timeChart.update();
+  timebarChart.update();
 }
 
 categories.forEach((category, index) => {
@@ -196,20 +198,26 @@ function adjustDesiredTimeChart() {
   desiredtimeValues.forEach((val, i) => {
     if(val.value) {
       timeChart.data.datasets[1].data[i] = val.value;
+      timebarChart.data.datasets[1].data[i] = val.value;
     }
   });
-  timeChart.data.datasets[1].data[8] = timeRemaining.value;
+  timeChart.data.datasets[1].data[8] = desiredtimeRemaining.value;
+  timebarChart.data.datasets[1].data[8] = desiredtimeRemaining.value;
   timeChart.update();
+  timebarChart.update();
 }
 
 function adjustTimeChart() {
   timeValues.forEach((val, i) => {
     if(val.value) {
       timeChart.data.datasets[0].data[i] = val.value;
+      timebarChart.data.datasets[0].data[i] = val.value;
     }
   });
   timeChart.data.datasets[0].data[8] = timeRemaining.value;
+  timebarChart.data.datasets[0].data[8] = timeRemaining.value;
   timeChart.update();
+  timebarChart.update();
 }
 
 timeValues.forEach(value => {
@@ -256,7 +264,7 @@ const timeChart = new Chart(timectx, {
           borderWidth: 2
       },
           {
-          label: 'Time Remaining',
+          label: 'Time Desired',
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 112
           ],
@@ -294,6 +302,82 @@ const timeChart = new Chart(timectx, {
       },
       display: true,
       position: 'right'
+    },
+      animation: {
+        animateRotate: false
+      }
+  }
+});
+
+const timebarctx = document.getElementById('ctx-timebar');
+const timebarChart = new Chart(timebarctx, {
+  type: 'horizontalBar',
+  data: {
+      labels: ['Work', 'Finances', 'Health', 'Fun', 'Faith', 'Family', 'Community', 'Learning', 'Free'],
+      datasets: [{
+          label: 'Time Spent',
+          data: [
+            0, 0, 0, 0, 0, 0, 0, 0, 112
+          ],
+          backgroundColor: [
+              '#27A349',
+              '#F1DE11',
+              '#EC8125',
+              '#F32C2C',
+              '#B041A0',
+              '#604C86',
+              '#3B64FA',
+              '#45FAF9',
+              '#FFFFFF'
+          ],
+          borderColor: [
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)'
+          ],
+          borderWidth: 2
+      },
+          {
+          label: 'Time Desired',
+          data: [
+            0, 0, 0, 0, 0, 0, 0, 0, 112
+          ],
+          backgroundColor: [
+              '#27A349',
+              '#F1DE11',
+              '#EC8125',
+              '#F32C2C',
+              '#B041A0',
+              '#604C86',
+              '#3B64FA',
+              '#45FAF9',
+              '#FFFFFF'
+          ],
+          borderColor: [
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)',
+              'rgba(0,0,0,0.8)'
+          ],
+          borderWidth: 2
+      }
+      ]
+  },
+  options: {
+    responsive: false,
+    legend: {
+      display: false
     },
       animation: {
         animateRotate: false
