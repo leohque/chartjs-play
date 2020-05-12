@@ -1,3 +1,58 @@
+let session = 1;
+
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const saveBtn = document.getElementById('save-btn');
+
+const part1 = document.getElementById('part1');
+const part2 = document.getElementById('part2');
+const part3 = document.getElementById('part3');
+
+function handleSession() {
+  switch(session) {
+    case 1:
+      prevBtn.classList.add('hidden');
+      part1.classList.remove('nodisplay');
+      part2.classList.add('nodisplay');
+      break;
+    case 2:
+      saveBtn.classList.add('nodisplay');
+      nextBtn.classList.remove('nodisplay');
+      prevBtn.classList.remove('hidden');
+      part1.classList.add('nodisplay');
+      part2.classList.remove('nodisplay');
+      part3.classList.add('nodisplay');
+      break;
+    case 3:
+      nextBtn.classList.add('nodisplay');
+      saveBtn.classList.remove('nodisplay');
+      part2.classList.add('nodisplay');
+      part3.classList.remove('nodisplay');
+      break;
+  }
+}
+
+function prevSession(e) {
+  e.preventDefault();
+  session -= 1;
+  console.log(`session is ${session}`);
+  handleSession();
+}
+
+function nextSession(e) {
+  e.preventDefault();
+  session += 1;
+  console.log(`session is ${session}`);
+  handleSession();
+}
+
+prevBtn.addEventListener('click', prevSession);
+nextBtn.addEventListener('click', nextSession);
+
+
+
+
+
 const category1 = document.getElementById('category1');
 const category2 = document.getElementById('category2');
 const category3 = document.getElementById('category3');
@@ -30,14 +85,14 @@ const fullnessChart = new Chart(fullnessctx, {
             10, 10, 10, 10, 10, 10, 10, 10
           ],
           backgroundColor: [
-              '#27A349',
-              '#F1DE11',
-              '#EC8125',
-              '#F32C2C',
-              '#B041A0',
-              '#604C86',
-              '#3B64FA',
-              '#45FAF9'
+              'rgba(39, 163, 73, 1)',
+              'rgba(241, 222, 17, 1)',
+              'rgba(236, 129, 37, 1)',
+              'rgba(243, 44, 44, 1)',
+              'rgba(176, 65, 160, 1)',
+              'rgba(96, 76, 134, 1)',
+              'rgba(59, 100, 250, 1)',
+              'rgba(69, 250, 249, 1)'
           ],
           borderColor: [
               'rgba(0,0,0,0.8)',
@@ -119,18 +174,24 @@ const desiredtimeValue8 = document.getElementById('desiredtime8');
 const desiredtimeValues = [desiredtimeValue1, desiredtimeValue2, desiredtimeValue3, desiredtimeValue4, desiredtimeValue5, desiredtimeValue6, desiredtimeValue7, desiredtimeValue8]
 
 
+function updateCharts() {
+  fullnessChart.update();
+  timeChart.update();
+  timebarChart.update();
+  desiredtimeChart.update();
+}
+
 function changeCategory() {
   categories.forEach((category, i) => {
     fullnessChart.data.labels[i] = category.value;
     timeChart.data.labels[i] = category.value;
+    desiredtimeChart.data.labels[i] = category.value;
     timebarChart.data.labels[i] = category.value;
   });
   timeCategories.forEach((category, i) => {
     category.value = fullnessChart.data.labels[i];
   });
-  fullnessChart.update();
-  timeChart.update();
-  timebarChart.update();
+  updateCharts();
 }
 
 categories.forEach((category, index) => {
@@ -147,7 +208,7 @@ function modifyFullness() {
   fullnessValues.forEach((piece, i) => {
     fullnessChart.data.datasets[0].data[i] = piece.value;
   });
-  fullnessChart.update();
+  updateCharts();
 }
 
 fullnessValues.forEach((piece) => {
@@ -192,6 +253,8 @@ function modifyDesiredRemainingTime() {
   let avail = timeAvailable.value;
   let remaining = avail - t;
   desiredtimeRemaining.value = remaining;
+  adjustTimeChart();
+  adjustDesiredTimeChart();
 }
 
 function adjustDesiredTimeChart() {
@@ -203,9 +266,7 @@ function adjustDesiredTimeChart() {
   });
   desiredtimeChart.data.datasets[0].data[8] = desiredtimeRemaining.value;
   timebarChart.data.datasets[1].data[8] = desiredtimeRemaining.value;
-  timeChart.update();
-  desiredtimeChart.update();
-  timebarChart.update();
+  updateCharts();
 }
 
 function adjustTimeChart() {
@@ -217,8 +278,7 @@ function adjustTimeChart() {
   });
   timeChart.data.datasets[0].data[8] = timeRemaining.value;
   timebarChart.data.datasets[0].data[8] = timeRemaining.value;
-  timeChart.update();
-  timebarChart.update();
+  updateCharts();
 }
 
 timeValues.forEach(value => {
@@ -241,15 +301,15 @@ const timeChart = new Chart(timectx, {
             0, 0, 0, 0, 0, 0, 0, 0, 112
           ],
           backgroundColor: [
-              '#27A349',
-              '#F1DE11',
-              '#EC8125',
-              '#F32C2C',
-              '#B041A0',
-              '#604C86',
-              '#3B64FA',
-              '#45FAF9',
-              '#FFFFFF'
+              'rgba(39, 163, 73, 1)',
+              'rgba(241, 222, 17, 1)',
+              'rgba(236, 129, 37, 1)',
+              'rgba(243, 44, 44, 1)',
+              'rgba(176, 65, 160, 1)',
+              'rgba(96, 76, 134, 1)',
+              'rgba(59, 100, 250, 1)',
+              'rgba(69, 250, 249, 1)',
+              'rgba(255, 255, 255, 1)'
           ],
           borderColor: [
               'rgba(0,0,0,0.8)',
@@ -292,15 +352,15 @@ const desiredtimeChart = new Chart(desiredtimectx, {
             0, 0, 0, 0, 0, 0, 0, 0, 112
           ],
           backgroundColor: [
-              '#27A349',
-              '#F1DE11',
-              '#EC8125',
-              '#F32C2C',
-              '#B041A0',
-              '#604C86',
-              '#3B64FA',
-              '#45FAF9',
-              '#FFFFFF'
+              'rgba(39, 163, 73, 1)',
+              'rgba(241, 222, 17, 1)',
+              'rgba(236, 129, 37, 1)',
+              'rgba(243, 44, 44, 1)',
+              'rgba(176, 65, 160, 1)',
+              'rgba(96, 76, 134, 1)',
+              'rgba(59, 100, 250, 1)',
+              'rgba(69, 250, 249, 1)',
+              'rgba(255, 255, 255, 1)'
           ],
           borderColor: [
               'rgba(0,0,0,0.8)',
@@ -343,15 +403,15 @@ const timebarChart = new Chart(timebarctx, {
             0, 0, 0, 0, 0, 0, 0, 0, 112
           ],
           backgroundColor: [
-              '#27A349',
-              '#F1DE11',
-              '#EC8125',
-              '#F32C2C',
-              '#B041A0',
-              '#604C86',
-              '#3B64FA',
-              '#45FAF9',
-              '#FFFFFF'
+              'rgba(39, 163, 73, 1)',
+              'rgba(241, 222, 17, 1)',
+              'rgba(236, 129, 37, 1)',
+              'rgba(243, 44, 44, 1)',
+              'rgba(176, 65, 160, 1)',
+              'rgba(96, 76, 134, 1)',
+              'rgba(59, 100, 250, 1)',
+              'rgba(69, 250, 249, 1)',
+              'rgba(255, 255, 255, 1)'
           ],
           borderColor: [
               'rgba(0,0,0,0.8)',
@@ -372,15 +432,15 @@ const timebarChart = new Chart(timebarctx, {
             0, 0, 0, 0, 0, 0, 0, 0, 112
           ],
           backgroundColor: [
-              '#27A349',
-              '#F1DE11',
-              '#EC8125',
-              '#F32C2C',
-              '#B041A0',
-              '#604C86',
-              '#3B64FA',
-              '#45FAF9',
-              '#FFFFFF'
+              'rgba(39, 163, 73, 1)',
+              'rgba(241, 222, 17, 1)',
+              'rgba(236, 129, 37, 1)',
+              'rgba(243, 44, 44, 1)',
+              'rgba(176, 65, 160, 1)',
+              'rgba(96, 76, 134, 1)',
+              'rgba(59, 100, 250, 1)',
+              'rgba(69, 250, 249, 1)',
+              'rgba(255, 255, 255, 1)'
           ],
           borderColor: [
               'rgba(0,0,0,0.8)',

@@ -9,34 +9,49 @@
 </head>
 <body>
   <div class="container">
-    <h2>Define for Yourself</h2>
-    <p>Edit the following categories & assign them a value of importance</p>
-    <div class="intro-category">
-      <div class="categories">
-        <input type="text" id="category1">
-        <input type="text" id="category2">
-        <input type="text" id="category3">
-        <input type="text" id="category4">
-        <input type="text" id="category5">
-        <input type="text" id="category6">
-        <input type="text" id="category7">
-        <input type="text" id="category8">
+    <div id="part1">
+      <h2>How developed are you in this area?</h2>
+      <p>Assign a value to each category, 1 being not at all, 10 being fully developed.<br>
+        <sub>Note: You can edit the categories to fit your needs!</sub></p>
+      <div class="intro-category">
+        <div class="categories">
+          <h3>Category</h3>
+          <input type="text" id="category1">
+          <input type="text" id="category2">
+          <input type="text" id="category3">
+          <input type="text" id="category4">
+          <input type="text" id="category5">
+          <input type="text" id="category6">
+          <input type="text" id="category7">
+          <input type="text" id="category8">
+        </div>
+        <div class="fullness">
+          <h3>Value</h3>
+          <input type="number" id="fullness1" value="10">
+          <input type="number" id="fullness2" value="10">
+          <input type="number" id="fullness3" value="10">
+          <input type="number" id="fullness4" value="10">
+          <input type="number" id="fullness5" value="10">
+          <input type="number" id="fullness6" value="10">
+          <input type="number" id="fullness7" value="10">
+          <input type="number" id="fullness8" value="10">
+        </div>
+        <div class="developed">
+          <h3>What do you do here?</h3>
+          <input type="text" id="developed1">
+          <input type="text" id="developed2">
+          <input type="text" id="developed3">
+          <input type="text" id="developed4">
+          <input type="text" id="developed5">
+          <input type="text" id="developed6">
+          <input type="text" id="developed7">
+          <input type="text" id="developed8">
+        </div>
       </div>
-      <div class="fullness">
-        <input type="number" id="fullness1" value="10">
-        <input type="number" id="fullness2" value="10">
-        <input type="number" id="fullness3" value="10">
-        <input type="number" id="fullness4" value="10">
-        <input type="number" id="fullness5" value="10">
-        <input type="number" id="fullness6" value="10">
-        <input type="number" id="fullness7" value="10">
-        <input type="number" id="fullness8" value="10">
-      </div>
+      <canvas id="ctx-fullness" width="400" height="300"></canvas>
     </div>
-    <canvas id="ctx-fullness" width="400" height="300"></canvas>
-
-    <h2>Where do you actually spend your time?</h2>
-    <div class="time">
+    <div id="part2" class="nodisplay">
+      <h2>Where do you actually spend your time?</h2>
       <div class="time-values">
         <div class="time-total">Total hours per week: <input type="number" value="168" id="timeTotal"> (168 is reality)</div>
         <div class="time-sleeping">Time sleeping: <input type="number" value="56" id="timeSleeping"> (56 assumes 8 hours per night)</div>
@@ -86,8 +101,16 @@
         <canvas id="ctx-desiredtime" width="400" height="300"></canvas>
       </div>
       <canvas id="ctx-timebar" width="400" height="300"></canvas>
-    </div>
-  </div>
+    </div> <!-- end div#part2 -->
+    <div id="part3" class="nodisplay">
+      This is where we persist the info...
+    </div> <!-- end div#part3 -->
+    <div id="navigator">
+      <a id="prev-btn" class="btn hidden">Previous</a>
+      <a id="next-btn" class="btn">Next</a>
+      <a id="save-btn" class="btn nodisplay"></a>
+    </div> <!-- end div#navigator -->
+  </div> <!-- end div.container -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
   <script src="script.js"></script>
 </body>
