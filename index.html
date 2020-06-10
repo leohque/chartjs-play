@@ -11,88 +11,126 @@
   <div class="container">
     <div id="part1">
       <h2>How developed are you in this area?</h2>
-      <p>Assign a value to each category, 1 being not at all, 10 being fully developed.<br>
-        <sub>Note: You can edit the categories to fit your needs!</sub></p>
+      <p>Assign a value to each category,<br>
+        1 being not at all, 10 being fully developed.<br>
+        <sub>Note: You can edit the categories by tapping on them...</sub></p>
       <div class="intro-category">
         <div class="categories">
-          <h3>Category</h3>
-          <input type="text" id="category1">
-          <input type="text" id="category2">
-          <input type="text" id="category3">
-          <input type="text" id="category4">
+          <div class="cat-box">
+            <input type="text" id="category1">
+            <input type="range" id="fullnessrange1" name="fullnessrange1" value="5" min="0" max="10">
+            <span type="number" id="fullness1">5</span>
+          </div>
+          <div class="cat-box">
+            <input type="text" id="category2">
+            <input type="range" id="fullnessrange2" name="fullnessrange2" value="5" min="0" max="10">
+            <span type="number" id="fullness2">5</span>
+          </div>
+          <div class="cat-box">
+            <input type="text" id="category3">
+            <input type="range" id="fullnessrange3" name="fullnessrange3" value="5" min="0" max="10">
+            <span type="number" id="fullness3">5</span>
+          </div>
+          <div class="cat-box">
+            <input type="text" id="category4">
+            <input type="range" id="fullnessrange4" name="fullnessrange4" value="5" min="0" max="10">
+            <span type="number" id="fullness4">5</span>
+          </div>
+          <div class="cat-box">
           <input type="text" id="category5">
-          <input type="text" id="category6">
-          <input type="text" id="category7">
-          <input type="text" id="category8">
-        </div>
-        <div class="fullness">
-          <h3>Value</h3>
-          <input type="number" id="fullness1" value="10">
-          <input type="number" id="fullness2" value="10">
-          <input type="number" id="fullness3" value="10">
-          <input type="number" id="fullness4" value="10">
-          <input type="number" id="fullness5" value="10">
-          <input type="number" id="fullness6" value="10">
-          <input type="number" id="fullness7" value="10">
-          <input type="number" id="fullness8" value="10">
-        </div>
-        <div class="developed">
-          <h3>What do you do here?</h3>
-          <input type="text" id="developed1">
-          <input type="text" id="developed2">
-          <input type="text" id="developed3">
-          <input type="text" id="developed4">
-          <input type="text" id="developed5">
-          <input type="text" id="developed6">
-          <input type="text" id="developed7">
-          <input type="text" id="developed8">
+            <input type="range" id="fullnessrange5" name="fullnessrange5" value="5" min="0" max="10">
+            <span type="number" id="fullness5">5</span>
+          </div>
+          <div class="cat-box">
+            <input type="text" id="category6">
+            <input type="range" id="fullnessrange6" name="fullnessrange6" value="5" min="0" max="10">
+            <span type="number" id="fullness6">5</span>
+          </div>
+          <div class="cat-box">
+            <input type="text" id="category7">
+            <input type="range" id="fullnessrange7" name="fullnessrange7" value="5" min="0" max="10">
+            <span type="number" id="fullness7">5</span>
+          </div>
+          <div class="cat-box">
+            <input type="text" id="category8">
+            <input type="range" id="fullnessrange8" name="fullnessrange8" value="5" min="0" max="10">
+            <span type="number" id="fullness8">5</span>
+          </div>
         </div>
       </div>
+      <!-- <div class="developed">
+        <h3>What do you do here?</h3>
+        <input type="text" id="developed1">
+        <input type="text" id="developed2">
+        <input type="text" id="developed3">
+        <input type="text" id="developed4">
+        <input type="text" id="developed5">
+        <input type="text" id="developed6">
+        <input type="text" id="developed7">
+        <input type="text" id="developed8">
+        </div> -->
       <canvas id="ctx-fullness" width="400" height="300"></canvas>
     </div>
+
     <div id="part2" class="nodisplay">
       <h2>Where do you actually spend your time?</h2>
-      <div class="time-values">
-        <div class="time-total">Total hours per week: <input type="number" value="168" id="timeTotal"> (168 is reality)</div>
-        <div class="time-sleeping">Time sleeping: <input type="number" value="56" id="timeSleeping"> (56 assumes 8 hours per night)</div>
-        <div class="time-available">Time available: <input type="number" value="112" id="timeAvailable" disabled></div>
-      </div>
-      <p>Fill in...</p>
-      <div class="time-table">
-        <div class="time-categories">
-          <span>Category:</span>
-          <input type="text" id="time-category1" disabled>
-          <input type="text" id="time-category2" disabled>
-          <input type="text" id="time-category3" disabled>
-          <input type="text" id="time-category4" disabled>
-          <input type="text" id="time-category5" disabled>
-          <input type="text" id="time-category6" disabled>
-          <input type="text" id="time-category7" disabled>
-          <input type="text" id="time-category8" disabled>
-          <span>Remaining time:</span>
+      <p>There's 168 hours per week. That's based on reality.</p>
+      <p>How many hours do you spend sleeping?</p>
+        <div class="time-sleeping">
+          😴 <input type="number" value="56" id="timeSleeping"> hours 💤<br>
+          <sub>(56 assumes 8 hours per night)</sub>
         </div>
+      <div class="time-values">
+        <div class="time-total nodisplay">Total hours per week: <input type="number" value="168" id="timeTotal" disabled> (168 is reality)</div>
+        <div class="time-available">That means you're awake for <input type="text" value="112" id="timeAvailable" disabled> hours.
+        <p>How do you spend that time?</p></div>
+      </div>
+      <div class="time-table">
+          <div class="time-category">
+            <input type="text" id="time-category1" disabled>
+            <input type="number" id="time1">
+            <input type="number" id="desiredtime1">
+          </div>
+          <div class="time-category">
+            <input type="text" id="time-category2" disabled>
+            <input type="number" id="time2">
+            <input type="number" id="desiredtime2">
+          </div>
+          <div class="time-category">
+            <input type="text" id="time-category3" disabled>
+            <input type="number" id="time3">
+            <input type="number" id="desiredtime3">
+          </div>
+          <div class="time-category">
+            <input type="text" id="time-category4" disabled>
+            <input type="number" id="time4">
+            <input type="number" id="desiredtime4">
+          </div>
+          <div class="time-category">
+            <input type="text" id="time-category5" disabled>
+            <input type="number" id="time5">
+            <input type="number" id="desiredtime5">
+          </div>
+          <div class="time-category">
+            <input type="text" id="time-category6" disabled>
+            <input type="number" id="time6">
+            <input type="number" id="desiredtime6">
+          </div>
+          <div class="time-category">
+            <input type="text" id="time-category7" disabled>
+            <input type="number" id="time7">
+            <input type="number" id="desiredtime7">
+          </div>
+          <div class="time-category">
+            <input type="text" id="time-category8" disabled>
+            <input type="number" id="time8">
+            <input type="number" id="desiredtime8">
+          </div>
         <div class="time-values">
-          <span>Hours Spent</span>
-          <input type="number" id="time1">
-          <input type="number" id="time2">
-          <input type="number" id="time3">
-          <input type="number" id="time4">
-          <input type="number" id="time5">
-          <input type="number" id="time6">
-          <input type="number" id="time7">
-          <input type="number" id="time8">
           <input type="number" id="timeRemaining" value="112" disabled>
         </div>
+        <div>vs.</div>
         <div class="desired-time-values">
-          <span>Desired</span>
-          <input type="number" id="desiredtime1">
-          <input type="number" id="desiredtime2">
-          <input type="number" id="desiredtime3">
-          <input type="number" id="desiredtime4">
-          <input type="number" id="desiredtime5">
-          <input type="number" id="desiredtime6">
-          <input type="number" id="desiredtime7">
-          <input type="number" id="desiredtime8">
           <input type="number" id="desiredtimeRemaining" value="112" disabled>
         </div>
       </div>
@@ -102,16 +140,20 @@
       </div>
       <canvas id="ctx-timebar" width="400" height="300"></canvas>
     </div> <!-- end div#part2 -->
+
     <div id="part3" class="nodisplay">
       This is where we persist the info...
     </div> <!-- end div#part3 -->
+
     <div id="navigator">
       <a id="prev-btn" class="btn hidden">Previous</a>
       <a id="next-btn" class="btn">Next</a>
       <a id="save-btn" class="btn nodisplay"></a>
     </div> <!-- end div#navigator -->
+
   </div> <!-- end div.container -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
